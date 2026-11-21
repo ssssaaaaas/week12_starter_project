@@ -29,10 +29,19 @@ export default function Lab2TimerControl() {
     setCount(0);
   };
 
+  // 상태 글자
+  let statusText = 'Ready';
+  if (running) statusText = 'Running';
+  else if (count > 0) statusText = 'Paused';
+
   return (
     <div>
-      <p className="status">상태: {running ? 'Running' : 'Stopped'}</p>
+      <p className="status">
+        <span className={running ? 'dot on' : 'dot'}></span>
+        상태: {statusText}
+      </p>
       <div className="count">{formatTime(count)}</div>
+      <p className="hint">총 {count}초</p>
       <div className="controls">
         <button onClick={() => setRunning(true)} disabled={running}>Start</button>
         <button className="secondary" onClick={() => setRunning(false)} disabled={!running}>Stop</button>
